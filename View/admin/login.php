@@ -1,18 +1,18 @@
 <?php
 session_start();
+
 use Controller\UserController;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include_once "../../Model/DBconnection.php";
     include_once "../../Model/UserModel.php";
     include_once "../../Controller\UserController.php";
-$_SESSION["username"] = $_REQUEST["username"];
+    $_SESSION["username"] = $_REQUEST["username"];
     $loginController = new UserController();
     $loginController->login($_REQUEST);
 }
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ $_SESSION["username"] = $_REQUEST["username"];
 
 </head>
 <body>
-<div class="container d-flex justify-content-center pt-5" >
+<div class="container d-flex justify-content-center pt-5">
     <div class="col-12 col-md-6 ">
 
         <div class="card">

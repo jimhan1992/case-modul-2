@@ -14,7 +14,9 @@ class CategoryController
         $connection = new DBconnection("root", "");
         $this->categoryModel = new CategoryModel($connection->connect());
     }
-    public function addCategory(){
+
+    public function addCategory()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             include 'addCategory.php';
         } else {
@@ -30,11 +32,13 @@ class CategoryController
         $category = $this->categoryModel->listCategory();
         include 'listCategory.php';
     }
+
     public function listCategory1()
     {
         $category = $this->categoryModel->listCategory();
         include 'Core/navbar.php';
     }
+
     public function deleteCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -45,7 +49,7 @@ class CategoryController
             $id = $_REQUEST["id"];
             $category = $this->categoryModel;
             $category->deleteCategory($id);
-            echo "ok"." <a href='index.php?page=listCategory'><button type='submit' class='btn btn-primary'>List</button></a>";
+            echo "ok" . " <a href='index.php?page=listCategory'><button type='submit' class='btn btn-primary'>List</button></a>";
         }
     }
 
@@ -55,19 +59,20 @@ class CategoryController
             $id = $_GET['id'];
             $category = $this->categoryModel->getId($id);
             include 'editCategory.php';
-        }else {
+        } else {
             $id = $_POST['id'];
             $category = $_POST['name'];
             $this->categoryModel->editCategory($id, $category);
         }
     }
+
     public function getAllCategory()
     {
         $category = $this->categoryModel->getAllCategory();
         echo "<select class='custom-select' name='category_id'>";
-            foreach ($category as $value){
-               echo "<option class='form-control' value='".$value["name"]."'>".$value["name"]."</option> ";
-            }
-       echo "</select>" ;
+        foreach ($category as $value) {
+            echo "<option class='form-control' value='" . $value["name"] . "'>" . $value["name"] . "</option> ";
+        }
+        echo "</select>";
     }
 }

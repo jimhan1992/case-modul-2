@@ -3,7 +3,7 @@
 <div id="main" class="container">
     <div class="product">
         <div class="row mt-3">
-                <h4 style="color: #a701bd">BÀI ĐĂNG MỚI</h4>
+            <h4 style="color: #a701bd">BÀI ĐĂNG MỚI</h4>
         </div>
         <div class="row mt-3">
             <?php foreach ($posts as $value): ?>
@@ -15,7 +15,9 @@
                 </div>
                 <div class="col-9 mb-3">
                     <div>
-                        <h4><a class="text" href="index.php?page=view&id=<?php echo $value['id']; ?>"><?php echo $value['title'] ?></a></h4>
+                        <h4><a class="text"
+                               href="index.php?page=view&id=<?php echo $value['id']; ?>"><?php echo $value['title'] ?></a>
+                        </h4>
                     </div>
                     <div class="text1 ellipsis">
                         <span class="text1-concat">
@@ -28,7 +30,7 @@
 
             <?php endforeach; ?>
         </div>
-<!--        <a href="index.php?page=viewn&n=500" style="text-align: center">Read more >></a>-->
+        <!--        <a href="index.php?page=viewn&n=500" style="text-align: center">Read more >></a>-->
 
     </div>
 </div>

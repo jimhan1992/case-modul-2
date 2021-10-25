@@ -5,11 +5,11 @@
     </div>
     <div class="form-group">
         <label>Thumbnail</label><br>
-        <input type="file" name="image"  id="fileToUpload" >
+        <input type="file" name="image" id="fileToUpload">
     </div>
 
     <div class="form-group">
-<!--        <label>Teaser</label>-->
+        <!--        <label>Teaser</label>-->
         <input type="hidden" name="summary" class="form-control">
     </div>
     <div class="form-group">
@@ -19,11 +19,12 @@
     <div class="form-group">
         <label>Category</label><br>
         <?php use Controller\CategoryController;
+
         $category1 = new CategoryController();
         $category1->getAllCategory(); ?>
     </div>
-        <label></label>
-        <input type="hidden" name="user_id" class="form-control" value="<?php echo $_SESSION["username"]?>"/>
+    <label></label>
+    <input type="hidden" name="user_id" class="form-control" value="<?php echo $_SESSION["username"] ?>"/>
     <div class="form-group">
         <label>Created</label>
         <input type="date" name="date" class="form-control"/>

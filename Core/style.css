@@ -2,9 +2,10 @@
     height: 300px;
 }
 body {
-    margin: 0px;
-    font-family: Arial;
-    line-height: 20px;
+    height: 100%;
+    /*margin: 0px;*/
+    /*font-family: Arial;*/
+    /*line-height: 20px;*/
 }
 .container {
     margin: 5px 10px;
@@ -207,6 +208,9 @@ a:hover, a.link:hover, a.navbar:hover {
     text-decoration: none;
     /*border: 1px solid;*/
 }
-#footer{
-    border:solid;
+#footer {
+    clear: both;
+    position: absolute;
+    height: 200px;
+    margin-top: -200px;
 }

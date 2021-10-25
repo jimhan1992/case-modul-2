@@ -2,8 +2,10 @@
 include_once "../../Model/DBconnection.php";
 include_once "../../Model/UserModel.php";
 include_once "../../Controller/UserController.php";
+
 use Controller\UserController;
-$adduser= new UserController();
+
+$adduser = new UserController();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,7 @@ $adduser= new UserController();
 
 </head>
 <body>
-<div class="container d-flex justify-content-center pt-5" >
+<div class="container d-flex justify-content-center pt-5">
     <div class="col-12 col-md-6 ">
 
         <div class="card">
@@ -26,7 +28,7 @@ $adduser= new UserController();
             <form method="post">
                 <div class="card-body">
                     <div class="col-12 col md-6">
-<!--                        --><?php //$adduser->addUser(); ?>
+                        <!--                        --><?php //$adduser->addUser(); ?>
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input required type="text" class="form-control" id="username" name="username">

@@ -26,13 +26,9 @@ include "core/header.php";
 ?>
 
 
-
-
-
-
 <div class="sidebar-container">
     <div class="sidebar-logo">
-        Hi ! <?php echo $_SESSION["username"] ;?>
+        Hi ! <?php echo $_SESSION["username"]; ?>
     </div>
     <ul class="sidebar-navigation">
         <li class="header">Post</li>
@@ -81,7 +77,7 @@ include "core/header.php";
         ?>
 
         <!-- Main component for a primary marketing message or call to action -->
-<!--        <div  class="jumbotron"></div>-->
+        <!--        <div  class="jumbotron"></div>-->
         <div>
             <div class="col-12 col-md-12">
 
@@ -142,21 +138,6 @@ include "core/header.php";
 
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--<div class="container">-->

@@ -2,7 +2,7 @@
 
 <h3><?php echo $posts['title']; ?></h3>
 
-<form method="post" >
+<form method="post">
     <input type="hidden" name="id" value="<?php echo $posts['id']; ?>"/>
     <div class="form-group">
         <input type="submit" value="Delete" class="btn btn-danger"/>
