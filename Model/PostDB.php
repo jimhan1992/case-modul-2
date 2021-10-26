@@ -74,19 +74,25 @@ class PostDB
     }
     //truy van voi dieu kien
     public function showCategory($key){
-        $sql = "SELECT * FROM posts WHERE category_id = 'Tổng quan' LIMIT $key";
+        $sql = "SELECT * FROM posts WHERE category_id = '$key' ORDER BY id DESC LIMIT 3";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     public function listCategoryPost($key){
-        $sql = "SELECT * FROM posts WHERE category_id LIKE N'%$key%'";
+        $sql = "SELECT * FROM posts WHERE category_id LIKE N'%$key%'  ORDER BY id DESC";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     public function randPost(){
         $sql = "SELECT * FROM posts ORDER BY RAND() LIMIT 5";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function relatedPosts($category){
+        $sql = "SELECT * FROM posts WHERE category_id = '$category' ORDER BY RAND() LIMIT 5";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();

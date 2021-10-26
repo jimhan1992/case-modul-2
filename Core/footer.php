@@ -1,4 +1,4 @@
-<div id="footer" class="footer bg-dark text-white sticky-bottom">
+<div  class="footer bg-dark text-white sticky-bottom">
     <div class="row">
         <div class="col-lg-4">
             <h4>Về Chúng Tôi</h4>

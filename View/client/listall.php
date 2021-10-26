@@ -9,14 +9,14 @@
             <?php foreach ($posts as $value): ?>
 
                 <div class="col-3 mb-3">
-                    <a href="index.php?page=view&id=<?php echo $value['id']; ?>"><img
+                    <a href="index.php?page=view&id=<?php echo $value['id']; ?>" title="<?php echo $value['title'] ?>"><img
                                 src="images/<?php echo $value['image']; ?>"
                                 alt="<?php echo $value['title']; ?>" style="width: 200px ;height: 120px"></a>
                 </div>
                 <div class="col-9 mb-3">
                     <div>
                         <h4><a class="text"
-                               href="index.php?page=view&id=<?php echo $value['id']; ?>"><?php echo $value['title'] ?></a>
+                               href="index.php?page=view&id=<?php echo $value['id']; ?>" title="<?php echo $value['title'] ?>" ><?php echo $value['title'] ?></a>
                         </h4>
                     </div>
                     <div class="text1 ellipsis">

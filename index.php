@@ -58,7 +58,8 @@ include_once "Core/banner.php";
                     $postcontroller->listCategoryPost($key);
                     break;
                 default:
-                    $postcontroller->showCategory();
+                    $postcontroller->showCategory("TỔNG QUAN");
+                    $postcontroller->showCategory("OOP");
                     $postcontroller->listPost1();
                     break;
             }

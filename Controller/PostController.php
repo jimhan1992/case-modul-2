@@ -104,7 +104,7 @@ class PostController
         }
     }
 
-    public function showCategory($key = 6)
+    public function showCategory($key)
     {
         $category = $this->postDB->showCategory($key);
         include 'View/client/listCategory.php';
@@ -121,6 +121,29 @@ class PostController
     {
         $randPost = $this->postDB->randPost();
         include 'View/client/randPost.php';
+    }
+
+    public function relatedPosts()
+    {
+        $id = $_GET['id'];
+        $post = $this->postDB->getId($id);
+        $category = $post["category_id"];
+        $relatedPosts = $this->postDB->relatedPosts($category);
+        echo '<h4 style="color: #a701bd">Bài Viết Liên Quan</h4>
+                <div class="row">';
+        foreach ($relatedPosts as $value) {
+            echo '<div class="col-4 mt-3">
+            <div class="card" style="width: auto;">
+                <a href="index.php?page=view&id=' . $value['id'] . '" title="' . $value['title'] . '"> <img
+                            src="images/' . $value['image'] . '" class="card-img-top" alt="..."
+                            style="height: 200px"></a>
+                <div class="card-body">
+                    <h5><a class="text1" href="index.php?page=view&id=' . $value['id'] . '" title="' . $value['title'] . '">' . $value['title'] . '</a></h5>
+</div>
+</div>
+</div>';
+        }
+
     }
 
 }
