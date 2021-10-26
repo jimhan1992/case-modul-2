@@ -13,6 +13,7 @@
                         <th>User Name</th>
                         <th>Password</th>
                         <th>Full Name</th>
+                        <th></th>
 
                     </tr>
                     </thead>
@@ -23,7 +24,13 @@
                             <td><?php echo $value['username']; ?></td>
                             <td><?php echo $value['password']; ?></td>
                             <td><?php echo $value['full_name']; ?></td>
-
+                            <td>
+                                <a class="btn btn-outline-danger"
+                                   href="index.php?page=deleteUser&id=<?php echo $value["id"]; ?>">Delete</a>
+                                <a class="btn btn-outline-warning"
+                                   href="index.php?page=editUser&id=<?php echo $value["id"]; ?>">Edit</a>
+                            </td>
+                        </tr>
                             <?php endforeach; ?>
                     </tbody>
                 </table>

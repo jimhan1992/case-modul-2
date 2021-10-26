@@ -7,12 +7,12 @@ use Model\UserModel;
 
 class UserController
 {
-    public $postDB;
+    public $userModel;
 
     public function __construct()
     {
         $connection = new DBconnection("root", "");
-        $this->postDB = new UserModel($connection->connect());
+        $this->userModel = new UserModel($connection->connect());
     }
 
     public function addUser()
@@ -40,7 +40,7 @@ class UserController
                 }
 
                 if ($error) {
-                    $this->postDB->addUser($user);
+                    $this->userModel->addUser($user);
                     echo "<p style='color: blue'>Đăng Ký Thành Công</p>";
 //                header("location: listUser.php");
                 }
@@ -50,7 +50,7 @@ class UserController
 
     public function listUser()
     {
-        $controller = $this->postDB->listUser();
+        $controller = $this->userModel->listUser();
         include 'listUser.php';
     }
 
@@ -58,7 +58,7 @@ class UserController
     {
         $username = $_SESSION['username'] = $request['username'];
         $password = $request['password'];
-        $isAccountExits = $this->postDB->checkAccount($username, $password);
+        $isAccountExits = $this->userModel->checkAccount($username, $password);
         if ($isAccountExits['SL'] != 0) {
             $_SESSION['isLogin'] = true;
             header('location: index.php');
@@ -72,5 +72,34 @@ class UserController
     {
         $_SESSION['isLogin'] = false;
         header('location: login.php?page=logout');
+    }
+
+    public function deleteUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $controller = $this->userModel->getId($id);
+            include 'deleteUser.php';
+        } else {
+            $id = $_REQUEST["id"];
+            $controller = $this->userModel;
+            $controller->deleteUser($id);
+
+        }
+    }
+
+    public function editUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $controller = $this->userModel->getId($id);
+            include 'editUser.php';
+        } else {
+            $id = $_POST['id'];
+            $user['username'] = $_POST['username'];
+            $user['password'] = $_POST['password'];
+            $user['full_name'] = $_POST['full_name'];
+            $this->userModel->editUser($id, $user);
+        }
     }
 }

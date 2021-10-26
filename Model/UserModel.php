@@ -10,7 +10,14 @@ class UserModel
     {
         $this->pdo = $connection;
     }
+    public function getId($id){
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        return $stmt->fetch();
 
+    }
     public function  addUser($user){
         $sql = "INSERT INTO users(username, password, full_name,level) VALUES (?, ?, ?,?)";
         $stmt = $this->pdo->prepare($sql);
@@ -18,7 +25,8 @@ class UserModel
         $stmt->bindParam(2, $user['password']);
         $stmt->bindParam(3, $user['full_name']);
         $stmt->bindParam(4, $user['level']);
-        return $stmt->execute();
+        $stmt->execute();
+        header("location: index.php?page=listUser");
 
     }
     function checkAccount($username, $password) {
@@ -36,6 +44,24 @@ class UserModel
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function deleteUser($id){
+        $sql = "DELETE FROM users WHERE id =$id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        header("location: index.php?page=listUser");
+    }
+
+    public function editUser($id, array $user)
+    {
+        $sql = "UPDATE users SET username = ?, password = ?, full_name = ? WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(1, $user['username']);
+        $statement->bindParam(2, $user['password']);
+        $statement->bindParam(3, $user['full_name']);
+        $statement->bindParam(4, $id);
+        $statement->execute();
+        header("location: index.php?page=listUser");
     }
 
 
