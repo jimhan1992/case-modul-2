@@ -13,15 +13,19 @@ class PostDB
     {
         $this->connection = $connection;
     }
+
     //hien thi tat ca bai viet theo N
-    public  function getAll(){
+    public function getAll()
+    {
         $sql = "SELECT * FROM posts ORDER BY id DESC ";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
     //them bai viet
-    public function  add($post){
+    public function add($post)
+    {
         $sql = "INSERT INTO posts(title, slug, view_number, image,summary,content,category_id,user_id,date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $post['title']);
@@ -36,8 +40,10 @@ class PostDB
         $stmt->execute();
         header("location: index.php?page=listPost");
     }
+
     //lay bai viet theo id
-    public function getId($id){
+    public function getId($id)
+    {
         $sql = "SELECT * FROM posts WHERE id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $id);
@@ -45,15 +51,19 @@ class PostDB
         return $stmt->fetch();
 
     }
+
     // xoa bai viet
-    public function delete($id){
+    public function delete($id)
+    {
         $sql = "DELETE FROM posts WHERE id =$id";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         header("location: index.php?page=listPost");
     }
+
     //sua bai viet
-    public function editPost($id,$post){
+    public function editPost($id, $post)
+    {
 //        title, slug, view_number, image,summary,content,category_id,user_id,date
         $sql = "UPDATE posts SET title = ?, content = ?, category_id = ?, date = ? WHERE id = ?";
         $statement = $this->connection->prepare($sql);
@@ -65,38 +75,77 @@ class PostDB
         $statement->execute();
         header("location: index.php?page=listPost");
     }
+
     //kiem theo title
-    public function search($key){
+    public function search($key)
+    {
         $sql = "SELECT * FROM posts WHERE title LIKE N'%$key%'";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
     //truy van voi dieu kien
-    public function showCategory($key){
+    public function showCategory($key)
+    {
         $sql = "SELECT * FROM posts WHERE category_id = '$key' ORDER BY id DESC LIMIT 3";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function listCategoryPost($key){
+
+    public function listCategoryPost($key)
+    {
         $sql = "SELECT * FROM posts WHERE category_id LIKE N'%$key%'  ORDER BY id DESC";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function randPost(){
+
+    public function randPost()
+    {
         $sql = "SELECT * FROM posts ORDER BY RAND() LIMIT 5";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function relatedPosts($category){
-        $sql = "SELECT * FROM posts WHERE category_id = '$category' ORDER BY RAND() LIMIT 5";
+
+    public function relatedPosts($category)
+    {
+        $sql = "SELECT * FROM posts WHERE category_id = '$category' ORDER BY RAND() LIMIT 6";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
+    public function pagination()
+    {
+        $limit = 3;
+        if (isset($_GET["pagination"])) {
+            $pagination = $_GET["pagination"];
+        } else {
+            $pagination = 1;
+        }
+        $start = ($pagination - 1) * $limit;
+        $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $start,$limit";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function page()
+    {
+        $limit = 3;
+        $sql = "SELECT COUNT(id) FROM posts";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        (int)$row_db=$stmt->fetch();
+        $total_records = $row_db[0];
+        $total_pages = ceil($total_records / $limit);
+        $pagLink = "<ul class='pagination'>";
+        for ($i=1; $i<=$total_pages; $i++) {
+            $pagLink .= "<li class='page-item'><a class='page-link' href='index.php?pagination=".$i."'>".$i."</a></li>";
+        }
+        echo $pagLink . "</ul>";
+    }
 
 }

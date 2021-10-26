@@ -145,5 +145,14 @@ class PostController
         }
 
     }
+    public function listPagination()
+    {
+        $posts = $this->postDB->pagination();
+        include 'View/client/listAll.php';
+    }
+    public function page()
+    {
+        $this->postDB->page();
+    }
 
 }

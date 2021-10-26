@@ -29,8 +29,10 @@
                 </div>
 
             <?php endforeach; ?>
+            <?php
+            $postcontroller2 = new \Controller\PostController();
+            $postcontroller2->page();
+            ?>
         </div>
-        <!--        <a href="index.php?page=viewn&n=500" style="text-align: center">Read more >></a>-->
-
     </div>
 </div>
