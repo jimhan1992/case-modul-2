@@ -89,7 +89,7 @@ include "core/sidebar.php";
                         $postcontroller->viewA();
                         break;
                     default:
-                        echo "2";
+                        $postcontroller->listPost();
                         break;
 
                 }
